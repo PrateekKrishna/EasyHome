@@ -9,7 +9,7 @@ const HouseCard = ({ title, price, image, location, id }) => {
 
   return (
     <div className="bg-gray-300 rounded-lg shadow-md overflow-hidden w-[300px] h-[380px] ">
-      <img src={"facebook.svg"} alt={title} className="w-full h-48 object-cover" />
+      <img src={"house.jpeg"} alt={title} className="w-full h-48 object-cover" />
       <div className="p-4">
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
         <p className="text-gray-600 mb-2">{location}</p>

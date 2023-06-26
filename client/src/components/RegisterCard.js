@@ -4,6 +4,7 @@ const RegisterCard = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [contact, setContact] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +48,23 @@ const RegisterCard = () => {
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="phone"
+          className="block text-gray-700 text-sm font-bold mb-2"
+        >
+          Contact
+        </label>
+        <input
+          type="contact"
+          id="contact"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+          placeholder="Enter your Phone Number"
+          value={contact}
+          onChange={(e) => setContact(e.target.value)}
           required
         />
       </div>
