@@ -10,6 +10,7 @@ const RegisterCard = () => {
     e.preventDefault();
 
     // Handle signup logic here
+    console.log(name, email, password, contact);
     console.log("Signup submitted");
   };
   return (

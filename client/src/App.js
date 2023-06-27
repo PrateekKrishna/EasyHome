@@ -9,6 +9,7 @@ import HouseDetails from './pages/HouseDetails';
 import Dashboard from './pages/Dashboard';
 import HomePage from './pages/Home';
 import Profile from './pages/Profile'
+import PopupForm from './components/PopupForm';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
               <Route path='/contact' element = {<Contact />} />
               <Route path='dashboard/house/:id' element = {<HouseDetails />} />
               <Route path='/profile' element = {<Profile />} />
+              <Route path='/popup' element = {<PopupForm />} />
             </Routes>
         </div>
         <Footer />
