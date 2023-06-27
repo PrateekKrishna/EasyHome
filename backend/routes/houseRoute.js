@@ -1,13 +1,13 @@
-const express = require('express')
-const router = express.Router()
-const {getHouse, setHouse, updateHouse, deleteHouse} = require('../controllers/houseController')
+import express from 'express'
+import { createProperty, deleteProperty, getAllProperties, getPropertyDetail, updateProperty } from "../controllers/houseController";
 
-router.get('/', getHouse)
+const router = express.Router();
 
-router.post('/', setHouse)
+router.route('/').get(getAllProperties);
+router.route('/:id').get(getPropertyDetail);
+router.route('/').post(createProperty);
+router.route('/:id').patch(updateProperty);
+router.route('/:id').delete(deleteProperty);
 
-router.put('/:id', updateHouse)
+export default router;
 
-router.delete('/:id', deleteHouse)
-
-module.exports = router
