@@ -4,6 +4,7 @@ import colors from 'colors'
 import connectDB from './config/db.js'
 import userRoute from './routes/userRoute.js'
 import houseRoute from './routes/houseRoute.js'
+import authRoute from './routes/authRoute.js'
 
 dotenv.config()
 const app = express();
@@ -18,7 +19,7 @@ app.use(express.urlencoded({extended: false}))
 
 app.use('/api/users', userRoute);
 app.use('/api/properties', houseRoute);
-
+app.use('/api/auth', authRoute)
 
 
 app.listen(port, ()=> {
