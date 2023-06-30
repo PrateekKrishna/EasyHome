@@ -1,11 +1,7 @@
-import User from '../model/UserModel'
+// import User from '../model/UserModel.js'
 
-const getAllUsers = async (req, res)=> {};
-const createUser = async (req, res)=> {};
-const getUserInfoByID = async (req, res)=> {};
-
-export{
-    getAllUsers, 
-    createUser, 
-    getUserInfoByID
-}
+export const getAllUsers = async (req, res)=> {
+    res.status(200).json({message: "get user"})
+};
+export const createUser = async (req, res)=> {};
+export const getUserInfoByID = async (req, res)=> {};

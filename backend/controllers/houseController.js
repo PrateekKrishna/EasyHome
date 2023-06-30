@@ -1,16 +1,10 @@
-import Property from '../model/HouseModel'
-import User from '../model/UserModel'
+// import Property from '../model/HouseModel.js'
+// import User from '../model/UserModel.js'
 
-const getAllProperties = async (req, res)=> {};
-const getPropertyDetail = async (req, res)=> {};
-const createProperty = async (req, res)=> {};
-const updateProperty = async (req, res)=> {};
-const deleteProperty = async (req, res)=> {};
-
-export  {
-    getAllProperties,
-    getPropertyDetail,
-    createProperty,
-    updateProperty, 
-    deleteProperty
-}
+export const getAllProperties = async (req, res)=> {
+    res.status(200).json({message: "get house"})
+};
+export const getPropertyDetail = async (req, res)=> {};
+export const createProperty = async (req, res)=> {};
+export const updateProperty = async (req, res)=> {};
+export const deleteProperty = async (req, res)=> {};

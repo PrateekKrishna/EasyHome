@@ -1,5 +1,6 @@
-const { underline } = require('colors');
-const mongoose = require('mongoose')
+
+import  underline  from "colors";
+import mongoose from "mongoose";
 
 const connectDB = async () =>{
     try {
@@ -12,4 +13,4 @@ const connectDB = async () =>{
     }
 }
 
-module.exports = connectDB;
+export default connectDB;

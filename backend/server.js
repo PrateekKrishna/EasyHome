@@ -1,12 +1,11 @@
-const express = require("express")
-const dotenv = require("dotenv").config()
-const colors = require('colors')
-const mongoose = require('mongoose')
-const connectDB = require('./config/db')
+import express from 'express'
+import dotenv from 'dotenv'
+import colors from 'colors'
+import connectDB from './config/db.js'
+import userRoute from './routes/userRoute.js'
+import houseRoute from './routes/houseRoute.js'
 
-import userRouter from './routes/userRoute.routes.js';
-import propertyRouter from './routes/houseRoute.routes.js';
-
+dotenv.config()
 const app = express();
 const port = process.env.PORT
 
@@ -17,12 +16,12 @@ app.use(express.urlencoded({extended: false}))
 
 
 
-app.use('/api/users', userRouter);
-app.use('/api/properties', propertyRouter);
+app.use('/api/users', userRoute);
+app.use('/api/properties', houseRoute);
 
 
 
 app.listen(port, ()=> {
-    console.log(`server started on port ${port}`)
+    console.log(`server started on port ${port}`.magenta)
 })
 
