@@ -1,14 +1,18 @@
 import React, { useState } from "react";
+import { useLogin } from "../hooks/useLogin";
+import { useNavigate } from "react-router-dom";
 
 const LoginCard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
+  const {login, error, isLoading} = useLogin();
+  const navigate = useNavigate
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     // Handle login logic here
-    console.log("Login submitted");
+    // console.log("Login submitted");
+    await login(email, password);
+    // navigate('/')
   };
   return (
     <div className="max-w-md w-full p-6 bg-gray-300 rounded-lg shadow-md">
@@ -45,6 +49,7 @@ const LoginCard = () => {
         </div>
         <div className="flex items-center justify-between">
           <button
+            disabled = {isLoading}
             type="submit"
             className=" bg-[#8B9A46] hover:bg-[#EEEEEE] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >

@@ -1,7 +1,12 @@
 import express from 'express'
 import { createProperty, deleteProperty, getAllProperties, getPropertyDetail, updateProperty } from "../controllers/houseController.js";
+import { requireAuth } from '../middleware/requireAuth.js';
 
-const router = express.Router();
+
+const router = express.Router()
+
+//require auth for all house routes
+router.use(requireAuth)
 
 router.route('/').get(getAllProperties);
 router.route('/:id').get(getPropertyDetail);

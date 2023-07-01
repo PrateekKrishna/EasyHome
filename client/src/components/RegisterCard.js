@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSignup } from "../hooks/useSignup.js";
+
 
 const RegisterCard = () => {
   const [name, setName] = useState("");
@@ -6,12 +8,16 @@ const RegisterCard = () => {
   const [password, setPassword] = useState("");
   const [contact, setContact] = useState("");
 
-  const handleSubmit = (e) => {
+  const {signup, isLoading, error} = useSignup();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    await signup(name, email, contact, password)
+
     // Handle signup logic here
-    console.log(name, email, password, contact);
-    console.log("Signup submitted");
+    // console.log(name, email, password, contact);
+    // console.log("Signup submitted");
   };
   return (
     <div className="max-w-md w-full p-6 bg-gray-300 rounded-lg shadow-md">
@@ -88,6 +94,7 @@ const RegisterCard = () => {
       </div>
       <div className="flex items-center justify-between">
         <button
+          disabled = {isLoading}
           type="submit"
           className="bg-[#8B9A46] hover:bg-[#EEEEEE] hover:text-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
@@ -106,6 +113,7 @@ const RegisterCard = () => {
         </a>
       </p>
     </div>
+    {/* {error && <div>{error}</div>} */}
   </div>
   );
 };
