@@ -1,21 +1,38 @@
 import React, { useState } from "react";
+import { useCreateProperty } from "../hooks/useCreateProperty";
+// import axios from "axios";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const PopupForm = ({ setIsOpen }) => {
+  const { user } = useAuthContext();
   const [houseDetails, sethouseDetails] = useState({
     title: "",
     location: "",
     price: "",
-    contact: "",
     description: "",
   });
+  const [image, setImage] = useState("");
 
   const closePopup = () => {
     setIsOpen(false);
   };
 
+  const { createProperty, error, isLoading } = useCreateProperty();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(houseDetails);
+    // console.log(image);
+    if (!user) {
+      throw new Error("User must be logged in");
+    }
+    const formData = new FormData();
+    formData.append("title", houseDetails.title);
+    formData.append("location", houseDetails.location);
+    formData.append("price", houseDetails.price);
+    formData.append("description", houseDetails.description);
+    // console.log(image);
+    formData.append("file", image);
+    createProperty(formData)
   };
 
   const handleChange = (e) => {
@@ -68,7 +85,7 @@ const PopupForm = ({ setIsOpen }) => {
               className="border border-gray-300 px-4 py-2 rounded w-full"
             />
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label htmlFor="contact" className="block mb-2">
               Your contact details
             </label>
@@ -80,7 +97,8 @@ const PopupForm = ({ setIsOpen }) => {
               id="contact"
               className="border border-gray-300 px-4 py-2 rounded w-full"
             />
-          </div>
+          </div> */}
+
           <div className="mb-4">
             <label htmlFor="description" className="block mb-2">
               Description
@@ -94,7 +112,19 @@ const PopupForm = ({ setIsOpen }) => {
               className="border border-gray-300 px-4 py-2 rounded w-full"
             />
           </div>
-
+          <div className="mb-4">
+            <label htmlFor="image" className="block mb-2">
+              Add Image of your Property
+            </label>
+            <input
+              onChange={(e) => setImage(e.target.files[0])}
+              value={houseDetails.contact}
+              type="file"
+              name="photo"
+              id="photo"
+              className="border border-gray-300 px-4 py-2 rounded w-full"
+            />
+          </div>
           {/* Add more form fields as needed */}
 
           <div className="flex justify-end">
@@ -106,6 +136,7 @@ const PopupForm = ({ setIsOpen }) => {
               Close
             </button>
             <button
+              disabled={isLoading}
               type="submit"
               className="bg-green-500 text-white px-4 py-2 rounded ml-2"
             >
@@ -114,6 +145,7 @@ const PopupForm = ({ setIsOpen }) => {
           </div>
         </form>
       </div>
+      {error && <div>error</div>}
     </div>
   );
 };

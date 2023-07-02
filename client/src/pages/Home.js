@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import PopupForm from "../components/PopupForm";
+import { useAuthContext } from "../hooks/useAuthContext";
 const HomePage = () => {
   const navigate = useNavigate();
   const handleSearch = () => {
@@ -12,7 +13,7 @@ const HomePage = () => {
   const openPopup = () => {
     setIsOpen(true);
   };
-
+  const { user } = useAuthContext();
   
 
   return (
@@ -26,18 +27,18 @@ const HomePage = () => {
             Browse through our wide selection of houses available for rent in
             various locations.
           </p>
-          <button
+          {user && <button
             onClick={handleSearch}
             className="bg-[#735F32] h-[40px] w-[200px] hover:bg-[#C69749] text-white font-bold py-2 px-4 rounded"
           >
             Search House
-          </button>
-          <button
+          </button>}
+          {user && <button
             onClick={openPopup}
             className="bg-[#735F32] h-[40px] w-[200px] hover:bg-[#C69749] text-white font-bold py-2 px-4 rounded"
           >
             Add House
-          </button>
+          </button>}
 
           {isOpen && <PopupForm setIsOpen={setIsOpen} />}
         </div>
