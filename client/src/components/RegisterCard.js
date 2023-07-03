@@ -113,7 +113,7 @@ const RegisterCard = () => {
         </a>
       </p>
     </div>
-    {/* {error && <div>{error}</div>} */}
+    {error && <div>{error}</div>}
   </div>
   );
 };

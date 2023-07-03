@@ -12,7 +12,7 @@ const LoginCard = () => {
     // Handle login logic here
     // console.log("Login submitted");
     await login(email, password);
-    // navigate('/')
+    navigate('/dashboard')
   };
   return (
     <div className="max-w-md w-full p-6 bg-gray-300 rounded-lg shadow-md">
@@ -74,6 +74,7 @@ const LoginCard = () => {
           </a>
         </p>
       </div>
+      {error && <div>error</div>}
     </div>
   );
 };
