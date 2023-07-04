@@ -23,7 +23,7 @@ const PopupForm = ({ setIsOpen, type, id }) => {
 
   const updateData = async(formData) =>{
     try {
-      const res = axios.patch(`http://localhost:5000/api/properties/${id}`, formData, {
+      const res = await axios.patch(`http://localhost:5000/api/properties/${id}`, formData, {
         headers: { Authorization: `Bearer ${user.token}`}
       })
       console.log(res);
@@ -46,7 +46,7 @@ const PopupForm = ({ setIsOpen, type, id }) => {
       formData.append("price", houseDetails.price);
       formData.append("description", houseDetails.description);
       formData.append("file", image);
-
+      updateData(formData)
     }else{
       const formData = new FormData();
       formData.append("title", houseDetails.title);
