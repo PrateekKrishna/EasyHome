@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useCreateProperty } from "../hooks/useCreateProperty";
-// import axios from "axios";
+import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 
-const PopupForm = ({ setIsOpen }) => {
+const PopupForm = ({ setIsOpen, type, id }) => {
   const { user } = useAuthContext();
+  const navigate = useNavigate();
   const [houseDetails, sethouseDetails] = useState({
     title: "",
     location: "",
@@ -19,20 +21,41 @@ const PopupForm = ({ setIsOpen }) => {
 
   const { createProperty, error, isLoading } = useCreateProperty();
 
+  const updateData = async(formData) =>{
+    try {
+      const res = axios.patch(`http://localhost:5000/api/properties/${id}`, formData, {
+        headers: { Authorization: `Bearer ${user.token}`}
+      })
+      console.log(res);
+      navigate('/dashboard')
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(image);
     if (!user) {
       throw new Error("User must be logged in");
     }
-    const formData = new FormData();
-    formData.append("title", houseDetails.title);
-    formData.append("location", houseDetails.location);
-    formData.append("price", houseDetails.price);
-    formData.append("description", houseDetails.description);
-    // console.log(image);
-    formData.append("file", image);
-    createProperty(formData)
+    if(type === 'update'){
+      const formData = new FormData();
+      formData.append("title", houseDetails.title);
+      formData.append("location", houseDetails.location);
+      formData.append("price", houseDetails.price);
+      formData.append("description", houseDetails.description);
+      formData.append("file", image);
+
+    }else{
+      const formData = new FormData();
+      formData.append("title", houseDetails.title);
+      formData.append("location", houseDetails.location);
+      formData.append("price", houseDetails.price);
+      formData.append("description", houseDetails.description);
+      formData.append("file", image);
+      createProperty(formData)
+    }
   };
 
   const handleChange = (e) => {

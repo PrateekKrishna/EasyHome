@@ -30,7 +30,7 @@ export const createProperty = async (req, res) => {
     location,
     photo: myCloud.secure_url,
     price,
-    owner: owner._id,
+    owner: owner,
   });
   owner.allProperties.push(response._id);
   await owner.save();
@@ -39,14 +39,85 @@ export const createProperty = async (req, res) => {
 };
 
 export const getAllProperties = async (req, res) => {
-  res.status(200).json({ message: "get house" });
+  const owner = await User.findById(req.user).select("-password");
+  if (!owner) {
+    throw new Error("Invalid request, user not found");
+  }
+  const response = await Property.find({})
+  res.status(200).json({ message: response });
 };
 
-//function to get all property
-export const getPropertyDetail = async (req, res) => {};
+
+//function to get details of specific property
+export const getPropertyDetail = async (req, res) => {
+  const houseID = req.params.id
+  const owner = await User.findById(req.user).select("-password");
+  if (!owner) {
+    throw new Error("Invalid request, user not found");
+  }
+  
+  const data = await Property.findById({_id: houseID})
+  res.status(200).json({ message: data});
+};
 
 //function to update property
-export const updateProperty = async (req, res) => {};
+export const updateProperty = async (req, res) => {
+  const houseID = req.params.id
+  const { title, description, location, price } = req.body;
+  const file = req.file;
+  if (!file) {
+    throw new Error("File not found");
+  }
+  const owner = await User.findById(req.user).select("-password");
+  if (!owner) {
+    throw new Error("Invalid request, user not found");
+  }
+  const house = await Property.findById({_id: houseID})
+  if(house.owner != owner.id){
+    // console.log('NOT EQUAL');
+    res.status(401);
+    throw new Error('You cannot delete others property')
+  }
+
+  const fileUri = getDataUri(file);
+  // console.log(fileUri);
+
+  const myCloud = await cloudinary.v2.uploader.upload(fileUri.content);
+
+  const updatedHome = await Property.findByIdAndUpdate({_id: houseID}, 
+    {
+      $set:{
+        title,
+        description,
+        location,
+        photo: myCloud.secure_url,
+        price,
+        owner: owner,
+      }
+    },
+    {
+      new: true
+    }
+    )
+
+  res.status(200).json(updatedHome);
+
+};
 
 //functino to delete property
-export const deleteProperty = async (req, res) => {};
+export const deleteProperty = async (req, res) => {
+  const houseID = req.params.id
+  const owner = await User.findById(req.user).select("-password");
+  if (!owner) {
+    throw new Error("Invalid request, user not found");
+  }
+  const house = await Property.findById({_id: houseID})
+  if(house.owner != owner.id){
+    // console.log('NOT EQUAL');
+    res.status(401);
+    throw new Error('You cannot delete others property')
+  }
+  // console.log(house.owner, owner._id);
+  const dlt = await Property.findByIdAndDelete({_id: houseID});
+  res.status(200).json({ message: dlt});
+};
