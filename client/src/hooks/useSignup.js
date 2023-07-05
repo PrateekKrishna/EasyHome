@@ -34,7 +34,7 @@ export const useSignup = () =>{
             dispatch({type: 'LOGIN', payload: json})
 
             setIsLoading(false)
-            navigate('/login')
+            navigate('/dashboard')
         }
     }
 

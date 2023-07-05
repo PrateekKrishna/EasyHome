@@ -10,10 +10,13 @@ const LoginCard = () => {
   const navigate = useNavigate
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic here
-    // console.log("Login submitted");
-    await login(email, password);
-    navigate('/dashboard')
+    try {
+      await login(email, password);
+      navigate('/dashboard')
+    } catch (error) {
+      console.log(error);
+    }
+    
   };
   return (
     <div className="max-w-md w-full p-6 bg-gray-300 rounded-lg shadow-md">

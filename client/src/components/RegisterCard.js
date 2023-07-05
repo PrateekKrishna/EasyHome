@@ -12,13 +12,14 @@ const RegisterCard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await signup(name, email, contact, password)
-
-    // Handle signup logic here
-    // console.log(name, email, password, contact);
-    // console.log("Signup submitted");
+    try {
+      await signup(name, email, contact, password)
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  
   return (
     <div className="max-w-md w-full p-6 bg-gray-300 rounded-lg shadow-md">
     <h2 className="text-2xl text-left font-bold mb-6">Signup</h2>

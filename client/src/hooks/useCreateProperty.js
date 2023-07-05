@@ -24,6 +24,7 @@ export const useCreateProperty = () => {
       navigate('/dashboard')
     } catch (error) {
       setError(error)
+      setIsLoading(false)
       console.log(error);
     }
   };
