@@ -51,15 +51,14 @@ const Navbar = () => {
                     Logout
                   </button>
                 )}
-                {
-                  !user && 
+                {!user && (
                   <a
                     href="/register"
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Signup
                   </a>
-                }
+                )}
                 {user && (
                   <a
                     href="/dashboard"
@@ -134,24 +133,45 @@ const Navbar = () => {
           >
             Home
           </a>
-          <a
-            href="/login"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            login
-          </a>
-          <a
-            href="/dashboard"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Dashboard
-          </a>
-          <a
-            href="/profile"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Profile
-          </a>
+          {!user ? (
+            <a
+              href="/login"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Login
+            </a>
+          ) : (
+            <button
+              onClick={handleClick}
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Logout
+            </button>
+          )}
+          {!user && (
+            <a
+              href="/register"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Signup
+            </a>
+          )}
+          {user && (
+            <a
+              href="/dashboard"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Dashboard
+            </a>
+          )}
+          {user && (
+            <a
+              href="/profile"
+              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Profile
+            </a>
+          )}
         </div>
       </div>
     </nav>
@@ -159,3 +179,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+//className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"

@@ -35,7 +35,7 @@ export const createProperty = async (req, res) => {
   owner.allProperties.push(response);
   await owner.save();
 
-  res.status(200).json(response);
+  res.status(200).json({message: response});
 };
 
 export const getAllProperties = async (req, res) => {
@@ -100,7 +100,7 @@ export const updateProperty = async (req, res) => {
     }
   );
 
-  res.status(200).json(updatedHome);
+  res.status(200).json({message: updatedHome});
 };
 
 //functino to delete property

@@ -36,7 +36,7 @@ app.use(cors(corsOptions))
 // }));
 // app.use("/upload", uploadController)
 
-app.use('/api/users', userRoute);
+app.use('/api/user', userRoute);
 app.use('/api/properties', houseRoute);
 app.use('/api/auth', authRoute)
 
