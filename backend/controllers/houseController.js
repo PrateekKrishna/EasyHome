@@ -65,17 +65,17 @@ export const updateProperty = async (req, res) => {
   const { title, description, location, price } = req.body;
   const file = req.file;
   if (!file) {
-    throw new Error("File not found");
+    res.status(500).json({message: "file not found"})
   }
   const owner = await User.findById(req.user).select("-password");
   if (!owner) {
-    throw new Error("Invalid request, user not found");
+    res.status(401).json({message: "Invalid request, user not found"})
   }
   const house = await Property.findById({ _id: houseID });
   if (house.owner != owner.id) {
     // console.log('NOT EQUAL');
-    res.status(401);
-    throw new Error("You cannot delete others property");
+    res.status(401).json({message: "You cannot delete others property"})
+    // throw new Error();
   }
 
   const fileUri = getDataUri(file);

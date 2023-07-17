@@ -3,6 +3,7 @@ import PopupForm from "../components/PopupForm";
 import HouseCard from "../components/HouseCard";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from 'axios'
+import { BASE_URL } from "../utils/base";
 
 const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,7 @@ const Profile = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user/userprop", {
+        const response = await axios.get(`${BASE_URL}/user/userprop`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setData(response.data.message);
@@ -44,7 +45,7 @@ const Profile = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user", {
+        const response = await axios.get(`${BASE_URL}/user`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setProfile(response.data.message);

@@ -3,6 +3,7 @@ import { useCreateProperty } from "../hooks/useCreateProperty";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import {BASE_URL} from "../utils/base.js"
 
 const PopupForm = ({ setIsOpen, type, id }) => {
   const { user } = useAuthContext();
@@ -23,7 +24,7 @@ const PopupForm = ({ setIsOpen, type, id }) => {
 
   const updateData = async(formData) =>{
     try {
-      const res = await axios.patch(`http://localhost:5000/api/properties/${id}`, formData, {
+      const res = await axios.patch(`${BASE_URL}/properties/${id}`, formData, {
         headers: { Authorization: `Bearer ${user.token}`}
       })
       console.log(res);

@@ -5,6 +5,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import DeleteButton from '../components/DeleteButton.js'
 import UpdateButton from '../components/UpdateButton';
 import PopupForm from '../components/PopupForm';
+import {BASE_URL} from "../utils/base.js"
 
 const HouseDetails = () => {
   const params = useParams()
@@ -20,7 +21,7 @@ const HouseDetails = () => {
 
   const getData = async () =>{
     try {
-      const res = await axios.get(`http://localhost:5000/api/properties/${params.id}`,  {
+      const res = await axios.get(`${BASE_URL}/properties/${params.id}`,  {
         headers: { Authorization: `Bearer ${user.token}`},
       });
       setData(res.data.message)
@@ -32,7 +33,7 @@ const HouseDetails = () => {
 
   const deleteThis = async ()  =>{
     try {
-      await axios.delete(`http://localhost:5000/api/properties/${params.id}`, {
+      await axios.delete(`${BASE_URL}/properties/${params.id}`, {
         headers: { Authorization: `Bearer ${user.token}`},
       })
       navigate('/dashboard')

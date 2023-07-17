@@ -3,6 +3,7 @@ import HouseCard from "../components/HouseCard";
 import SearchBar from "../components/SearchBar";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
+import {BASE_URL} from "../utils/base.js"
 
 const Dashboard = () => {
   const { user } = useAuthContext();
@@ -12,7 +13,7 @@ const Dashboard = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/properties", {
+        const response = await axios.get(`${BASE_URL}/properties`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setData(response.data.message);

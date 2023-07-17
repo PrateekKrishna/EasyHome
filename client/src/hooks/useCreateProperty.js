@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./useAuthContext";
 import axios from 'axios'
+import {BASE_URL} from "../utils/base.js"
 export const useCreateProperty = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
@@ -16,7 +17,7 @@ export const useCreateProperty = () => {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:5000/api/properties", formData, {
+      const response = await axios.post(`${BASE_URL}/properties`, formData, {
           headers: { Authorization: `Bearer ${user.token}` },
       })
       setIsLoading(false)
