@@ -78,9 +78,9 @@ const HouseDetails = () => {
         <div className="mt-4">
           <p className="text-lg font-bold mb-2">Price: ₹{data.price}p/m</p>
 
-          <button className="mb-2 bg-[#8B9A46] hover:bg-[#EEEEEE] text-white hover:text-black font-bold py-2 px-4 rounded">
+          {/* <button className="mb-2 bg-[#8B9A46] hover:bg-[#EEEEEE] text-white hover:text-black font-bold py-2 px-4 rounded">
             Contact
-          </button>
+          </button> */}
           
         </div>
          <DeleteButton onClick={deleteThis} />
